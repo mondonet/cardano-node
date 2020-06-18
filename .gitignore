@@ -12,7 +12,7 @@ dist/
 \.#*
 *.swp
 .dir-locals.el
-/result*
+result*
 /launch-*
 stack.yaml.lock
 

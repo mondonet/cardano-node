@@ -54,8 +54,9 @@ let
       $STRIP $out/bin/*
     '' else p;
 
-  self = {
+  packages = self: {
     inherit haskellPackages scripts nixosTests environments dockerImage;
+    cluster = pkgs.callPackage ./nix/supervisord-cluster { inherit (self) cardano-cli; };
 
     inherit (haskellPackages.cardano-node.identifier) version;
     # Grab the executable component of our package.
@@ -85,4 +86,4 @@ let
       withHoogle = true;
     };
 };
-in self
+in lib.makeScope lib.newScope packages
